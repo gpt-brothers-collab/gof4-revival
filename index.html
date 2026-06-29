@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galaxy on Fire 4: Revival - Coming Soon</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #0f0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #0f0;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            color: #0f0;
+        }
+
+        .countdown {
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+
+        form {
+            margin-top: 40px;
+        }
+
+        input[type="email"] {
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            width: 300px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            background-color: #0f0;
+            color: #000;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0c0;
+        }
+
+        .footer {
+            margin-top: 50px;
+            color: #0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Galaxy on Fire 4: Revival</h1>
+    <p class="subtitle">An epic return to the galaxy is coming soon</p>
+    <div class="countdown" id="countdown">Loading...</div>
+
+    <form action="mailto:milkdimka@gmail.com" method="post" enctype="text/plain">
+        <input type="email" name="subscriber" placeholder="Enter your email" required>
+        <input type="submit" value="Subscribe">
+    </form>
+
+    <div class="footer">
+        &copy; <span id="year"></span> Galaxy on Fire 4: Revival. All rights reserved.
+    </div>
+
+    <script>
+        // Set target date to one year from now
+        const now = new Date();
+        // Copy current date and add one year
+        const targetDate = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate(), 0, 0, 0);
+
+        function updateCountdown() {
+            const currentTime = new Date();
+            const diff = targetDate - currentTime;
+            if (diff <= 0) {
+                document.getElementById('countdown').innerHTML = "We're live!";
+                clearInterval(interval);
+                return;
+            }
+
+            const seconds = Math.floor(diff / 1000) % 60;
+            const minutes = Math.floor(diff / (1000 * 60)) % 60;
+            const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+            document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        // Initialize countdown and update every second
+        updateCountdown();
+        const interval = setInterval(updateCountdown, 1000);
+
+        // Set the current year in the footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
